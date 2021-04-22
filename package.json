@@ -10,6 +10,8 @@
       "prod": "yarn build && yarn serve",
       "analyze": "cross-env ANALYZE=true yarn build && webpack-bundle-analyzer build/stats.json",
       "dev": "cross-env NODE_ENV=development webpack serve --open",
+      "test": "jest",
+      "tdd": "jest --watch",
       "format": "prettier --write"
    },
    "lint-staged": {
