@@ -11,4 +11,9 @@ module.exports = {
    // Make jest able to resolve all absolute imports
    moduleDirectories: ['src', 'node_modules'],
    moduleFileExtensions: ['js', 'ts', 'tsx', 'json'],
+
+   coverageProvider: 'babel',
+   coverageDirectory: 'coverage',
+   collectCoverageFrom: ['src/**/*.{ts,tsx}'],
+   coveragePathIgnorePatterns: ['index\\.tsx?', '.+\\.d\\.ts'],
 };

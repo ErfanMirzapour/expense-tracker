@@ -12,6 +12,7 @@
       "dev": "cross-env NODE_ENV=development webpack serve --open",
       "test": "jest",
       "tdd": "jest --watch",
+      "coverage": "jest --coverage",
       "format": "prettier --write"
    },
    "lint-staged": {
