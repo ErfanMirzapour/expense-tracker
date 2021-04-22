@@ -1,7 +1,7 @@
 module.exports = {
    roots: ['<rootDir>/src'],
    testEnvironment: 'jest-environment-jsdom',
-   setupFilesAfterEnv: ['<rootDir>/jest/setupTests.ts'],
+   setupFilesAfterEnv: ['<rootDir>/jest/tests-setup.ts'],
    testRegex: '(/__tests__/.+|.+\\.test)\\.tsx?$',
    // Tests default timeout
    slowTestThreshold: 3,
