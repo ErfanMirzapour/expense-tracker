@@ -6,10 +6,13 @@ const buildPath = path.resolve(__dirname, 'build');
 const include = [path.resolve(__dirname, 'src')];
 
 const envs = { prod: 'production', dev: 'development' };
+const isProd = process.env.NODE_ENV === envs.prod;
 const isDevServer = process.env.NODE_ENV === envs.dev;
 
 module.exports = {
    mode: envs[isDevServer ? 'dev' : 'prod'],
+   // High quality source maps for production and fastest ones for development
+   devtool: isProd ? 'source-map' : isDevServer && 'eval',
 
    entry: './src/index.ts',
    output: {
