@@ -11,8 +11,10 @@ const isDevServer = process.env.NODE_ENV === envs.dev;
 
 module.exports = {
    mode: envs[isDevServer ? 'dev' : 'prod'],
-   // High quality source maps for production and fastest ones for development
-   devtool: isProd ? 'source-map' : isDevServer && 'eval',
+   // High quality source maps for production and faster ones for development
+   devtool: isProd
+      ? 'source-map'
+      : isDevServer && 'inline-cheap-module-source-map',
 
    entry: './src/index.ts',
    output: {
