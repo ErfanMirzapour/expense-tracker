@@ -1,10 +1,12 @@
 const path = require('path');
 
+const buildPath = path.resolve(__dirname, 'build');
+
 module.exports = {
    entry: './src/index.ts',
    output: {
       filename: 'main.js',
-      path: path.resolve(__dirname, 'build'),
+      path: buildPath,
    },
    resolve: {
       extensions: ['ts', 'tsx', 'js'],
@@ -23,5 +25,11 @@ module.exports = {
             },
          },
       ],
+   },
+
+   devServer: {
+      contentBase: buildPath,
+      compress: true,
+      port: 3001
    },
 };
