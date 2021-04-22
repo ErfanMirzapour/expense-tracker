@@ -98,5 +98,7 @@ module.exports = {
       contentBase: buildPath,
       compress: true,
       port: 3001,
+      // for SPAs
+      historyApiFallback: true,
    },
 };
