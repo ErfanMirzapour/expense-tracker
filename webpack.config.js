@@ -1,4 +1,5 @@
 const path = require('path');
+const HTMLWebpackPlugin = require('html-webpack-plugin');
 
 const buildPath = path.resolve(__dirname, 'build');
 
@@ -26,6 +27,12 @@ module.exports = {
          },
       ],
    },
+
+   plugins: [
+      new HTMLWebpackPlugin({
+         template: './src/index.html',
+      }),
+   ],
 
    devServer: {
       contentBase: buildPath,
