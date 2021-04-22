@@ -7,6 +7,7 @@
       "build-dev": "webpack --watch",
       "serve": "opener http://localhost:5000 && serve -s build -l 5000",
       "prod": "yarn build && yarn serve",
+      "analyze": "cross-env ANALYZE=true yarn build && webpack-bundle-analyzer build/stats.json",
       "dev": "cross-env NODE_ENV=development webpack serve --open",
       "format": "prettier --write"
    },
@@ -47,6 +48,7 @@
       "style-loader": "^2.0.0",
       "typescript": "^4.2.4",
       "webpack": "^5.35.0",
+      "webpack-bundle-analyzer": "^4.4.1",
       "webpack-cli": "^4.6.0",
       "webpack-dev-server": "^3.11.2",
       "yarn": "^1.22.10"

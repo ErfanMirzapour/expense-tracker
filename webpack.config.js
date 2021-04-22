@@ -2,6 +2,7 @@ const path = require('path');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerWebpackPlugin = require('css-minimizer-webpack-plugin');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 const envs = { prod: 'production', dev: 'development' };
 const isProd = process.env.NODE_ENV === envs.prod;
@@ -85,6 +86,11 @@ module.exports = {
       !isDevServer &&
          new MiniCssExtractPlugin({
             filename: `[name].${hash}.css`,
+         }),
+      process.env.ANALYZE &&
+         new BundleAnalyzerPlugin({
+            analyzerMode: 'disabled',
+            generateStatsFile: true,
          }),
    ].filter(Boolean),
 
