@@ -29,7 +29,7 @@ module.exports = {
       modules: ['src', 'node_modules'],
    },
 
-   entry: './src/index.ts',
+   entry: './src/index.tsx',
    output: {
       path: buildPath,
       filename: `[name].${hash}.js`,

@@ -9,6 +9,12 @@ module.exports = {
             corejs: '3.10',
          },
       ],
+      [
+         '@babel/preset-react',
+         {
+            runtime: 'automatic',
+         },
+      ],
       '@babel/preset-typescript',
    ],
    plugins: [isProd && 'babel-plugin-jsx-remove-data-test-id'].filter(Boolean),
