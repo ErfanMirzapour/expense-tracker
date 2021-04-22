@@ -12,6 +12,10 @@ module.exports = {
    moduleDirectories: ['src', 'node_modules'],
    moduleFileExtensions: ['js', 'ts', 'tsx', 'json'],
 
+   moduleNameMapper: {
+      '\\.module\\.scss$': 'identity-obj-proxy',
+   },
+
    coverageProvider: 'babel',
    coverageDirectory: 'coverage',
    collectCoverageFrom: ['src/**/*.{ts,tsx}'],
