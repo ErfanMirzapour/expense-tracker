@@ -2,6 +2,7 @@ const path = require('path');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 
 const buildPath = path.resolve(__dirname, 'build');
+const include = [path.resolve(__dirname, 'src')];
 
 module.exports = {
    entry: './src/index.ts',
@@ -17,13 +18,18 @@ module.exports = {
       rules: [
          {
             test: /\.tsx?/,
-            include: [path.resolve(__dirname, 'src')],
+            include,
             use: {
                loader: 'babel-loader',
                options: {
                   cacheDirectory: true,
                },
             },
+         },
+         {
+            test: /\.scss?/,
+            include,
+            use: ['style-loader', 'css-loader', 'sass-loader'],
          },
       ],
    },
