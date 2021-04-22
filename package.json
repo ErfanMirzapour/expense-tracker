@@ -1,7 +1,5 @@
 {
    "name": "growmatik-sample",
-   "version": "0.1.0",
-   "license": "MIT",
    "scripts": {
       "prepare": "husky install",
       "type": "tsc",

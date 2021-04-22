@@ -14,6 +14,10 @@ const cssModuleLocalIdentName = '[local]___[hash:base64:5]';
 
 module.exports = {
    mode: envs[isDevServer ? 'dev' : 'prod'],
+   // Currently there is a bug in webpack-dev-server.
+   // After adding a .browserslistrc live-reloading goes away,
+   // so we need to specify the target here.
+   target: isDevServer ? 'web' : 'browserslist',
    // High quality source maps for production and faster ones for development
    devtool: isProd
       ? 'source-map'
