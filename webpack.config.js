@@ -3,12 +3,14 @@ const HTMLWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerWebpackPlugin = require('css-minimizer-webpack-plugin');
 
-const buildPath = path.resolve(__dirname, 'build');
-const include = [path.resolve(__dirname, 'src')];
-
 const envs = { prod: 'production', dev: 'development' };
 const isProd = process.env.NODE_ENV === envs.prod;
 const isDevServer = process.env.NODE_ENV === envs.dev;
+
+const buildPath = path.resolve(__dirname, 'build');
+const include = [path.resolve(__dirname, 'src')];
+const hash = isProd ? '[contenthash:8]' : '';
+const cssModuleLocalIdentName = '[local]___[hash:base64:5]';
 
 module.exports = {
    mode: envs[isDevServer ? 'dev' : 'prod'],
@@ -24,8 +26,9 @@ module.exports = {
 
    entry: './src/index.ts',
    output: {
-      filename: 'main.js',
       path: buildPath,
+      filename: `[name].${hash}.js`,
+      clean: !isDevServer,
    },
    optimization: {
       minimize: isProd,
@@ -55,7 +58,7 @@ module.exports = {
                      importLoaders: 1,
                      modules: {
                         // CSS modules class names structure
-                        localIdentName: '[local]_[hash:base64:4]',
+                        localIdentName: cssModuleLocalIdentName,
                      },
                   },
                },
@@ -77,7 +80,7 @@ module.exports = {
       }),
       !isDevServer &&
          new MiniCssExtractPlugin({
-            filename: `[name].css`,
+            filename: `[name].${hash}.css`,
          }),
    ].filter(Boolean),
 
