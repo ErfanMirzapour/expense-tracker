@@ -1,6 +1,7 @@
 const path = require('path');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CssMinimizerWebpackPlugin = require('css-minimizer-webpack-plugin');
 
 const buildPath = path.resolve(__dirname, 'build');
 const include = [path.resolve(__dirname, 'src')];
@@ -15,16 +16,20 @@ module.exports = {
    devtool: isProd
       ? 'source-map'
       : isDevServer && 'inline-cheap-module-source-map',
+   resolve: {
+      extensions: ['.ts', '.tsx', '.js'],
+      // Guide webpack for resolving absolute imports
+      modules: ['src', 'node_modules'],
+   },
 
    entry: './src/index.ts',
    output: {
       filename: 'main.js',
       path: buildPath,
    },
-   resolve: {
-      extensions: ['.ts', '.tsx', '.js'],
-      // Guide webpack for resolving absolute imports
-      modules: ['src', 'node_modules'],
+   optimization: {
+      minimize: isProd,
+      minimizer: ['...', new CssMinimizerWebpackPlugin()],
    },
 
    module: {
@@ -64,6 +69,11 @@ module.exports = {
    plugins: [
       new HTMLWebpackPlugin({
          template: './src/index.html',
+         minify: isProd && {
+            removeAttributeQuotes: true,
+            removeComments: true,
+            collapseWhitespace: true,
+         },
       }),
       !isDevServer &&
          new MiniCssExtractPlugin({
