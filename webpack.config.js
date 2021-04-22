@@ -9,14 +9,14 @@ module.exports = {
       path: buildPath,
    },
    resolve: {
-      extensions: ['ts', 'tsx', 'js'],
+      extensions: ['.ts', '.tsx', '.js'],
    },
 
    module: {
       rules: [
          {
             test: /\.tsx?/,
-            include: ['src'],
+            include: [path.resolve(__dirname, 'src')],
             use: {
                loader: 'babel-loader',
                options: {
@@ -30,6 +30,6 @@ module.exports = {
    devServer: {
       contentBase: buildPath,
       compress: true,
-      port: 3001
+      port: 3001,
    },
 };
