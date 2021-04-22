@@ -1,5 +1,6 @@
 {
    "name": "growmatik-sample",
+   "private": true,
    "scripts": {
       "prepare": "husky install",
       "type": "tsc",
