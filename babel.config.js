@@ -1,3 +1,5 @@
+const isProd = process.env.NODE_ENV === 'production';
+
 module.exports = {
    presets: [
       [
@@ -9,4 +11,5 @@ module.exports = {
       ],
       '@babel/preset-typescript',
    ],
+   plugins: [isProd && 'babel-plugin-jsx-remove-data-test-id'].filter(Boolean),
 };
