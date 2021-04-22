@@ -12,9 +12,19 @@ module.exports = {
    moduleDirectories: ['src', 'node_modules'],
    moduleFileExtensions: ['js', 'ts', 'tsx', 'json'],
 
+   // Next three options clarify jest how to deal with different modules,
+   // just like webpack but for test environment
    moduleNameMapper: {
       '\\.module\\.scss$': 'identity-obj-proxy',
    },
+   transform: {
+      '^.+\\.(ts|tsx)$': 'babel-jest',
+      '^(?!.*\\.(ts|tsx|json)$)': '<rootDir>/jest/file-transformer.ts',
+   },
+   transformIgnorePatterns: [
+      '[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs|cjs|ts|tsx)$',
+      '^.+\\.module\\.scss$',
+   ],
 
    coverageProvider: 'babel',
    coverageDirectory: 'coverage',
