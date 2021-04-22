@@ -3,6 +3,7 @@ const HTMLWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerWebpackPlugin = require('css-minimizer-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
 const envs = { prod: 'production', dev: 'development' };
 const isProd = process.env.NODE_ENV === envs.prod;
@@ -92,6 +93,7 @@ module.exports = {
             analyzerMode: 'disabled',
             generateStatsFile: true,
          }),
+      isDevServer && new ReactRefreshWebpackPlugin(),
    ].filter(Boolean),
 
    devServer: {
@@ -100,5 +102,7 @@ module.exports = {
       port: 3001,
       // for SPAs
       historyApiFallback: true,
+      inline: true,
+      hot: true,
    },
 };

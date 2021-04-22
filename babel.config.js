@@ -1,4 +1,5 @@
 const isProd = process.env.NODE_ENV === 'production';
+const isDev = process.env.NODE_ENV === 'development';
 
 module.exports = {
    presets: [
@@ -17,5 +18,8 @@ module.exports = {
       ],
       '@babel/preset-typescript',
    ],
-   plugins: [isProd && 'babel-plugin-jsx-remove-data-test-id'].filter(Boolean),
+   plugins: [
+      isDev && 'react-refresh/babel',
+      isProd && 'babel-plugin-jsx-remove-data-test-id',
+   ].filter(Boolean),
 };
