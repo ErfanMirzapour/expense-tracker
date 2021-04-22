@@ -5,7 +5,12 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const buildPath = path.resolve(__dirname, 'build');
 const include = [path.resolve(__dirname, 'src')];
 
+const envs = { prod: 'production', dev: 'development' };
+const isDevServer = process.env.NODE_ENV === envs.dev;
+
 module.exports = {
+   mode: envs[isDevServer ? 'dev' : 'prod'],
+
    entry: './src/index.ts',
    output: {
       filename: 'main.js',
@@ -13,6 +18,7 @@ module.exports = {
    },
    resolve: {
       extensions: ['.ts', '.tsx', '.js'],
+      // Guide webpack for resolving absolute imports
       modules: ['src', 'node_modules'],
    },
 
@@ -32,7 +38,7 @@ module.exports = {
             test: /\.scss?/,
             include,
             use: [
-               MiniCssExtractPlugin.loader,
+               !isDevServer ? MiniCssExtractPlugin.loader : 'style-loader',
                {
                   loader: 'css-loader',
                   options: {
@@ -54,10 +60,11 @@ module.exports = {
       new HTMLWebpackPlugin({
          template: './src/index.html',
       }),
-      new MiniCssExtractPlugin({
-         filename: `[name].css`,
-      }),
-   ],
+      !isDevServer &&
+         new MiniCssExtractPlugin({
+            filename: `[name].css`,
+         }),
+   ].filter(Boolean),
 
    devServer: {
       contentBase: buildPath,
