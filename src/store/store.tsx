@@ -3,7 +3,9 @@ import { Provider } from 'react-redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { FC } from 'react';
 
-const store = createStore(() => {}, composeWithDevTools());
+import rootReducer from './root-reducer';
+
+const store = createStore(rootReducer, composeWithDevTools());
 
 export const AppProvider: FC = ({ children }) => (
    <Provider store={store}> {children} </Provider>
