@@ -1,5 +1,15 @@
+import { Wallet, TransactionsList, Transaction } from './components';
+import { useAppContext } from './contexts';
+
 const App = () => {
-   return <h1>Growmatik Sample</h1>;
+   const [{ displayTransaction }] = useAppContext();
+
+   return (
+      <>
+         <Wallet />
+         {displayTransaction ? <Transaction /> : <TransactionsList />}
+      </>
+   );
 };
 
 export default App;
