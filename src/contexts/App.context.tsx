@@ -1,17 +1,11 @@
 import { createContext, FC, useContext, useReducer } from 'react';
 
-export enum actionTypes {
-   DISPLAY_LIST = 'DISPLAY_LIST',
-   DISPLAY_ADD = 'DISPLAY_ADD',
-   DISPLAY_EDIT = 'DISPLAY_EDIT',
-}
-
 type Action =
    | {
-        type: actionTypes.DISPLAY_LIST | actionTypes.DISPLAY_ADD;
+        type: 'DISPLAY_LIST' | 'DISPLAY_ADD';
      }
    | {
-        type: actionTypes.DISPLAY_EDIT;
+        type: 'DISPLAY_EDIT';
         transactionId: string;
      };
 
@@ -27,19 +21,19 @@ const initialState: InitialState = {
 
 const reducer = (state: InitialState, action: Action): InitialState => {
    switch (action.type) {
-      case actionTypes.DISPLAY_LIST:
+      case 'DISPLAY_LIST':
          return {
             displayTransaction: false,
             transactionId: null,
          };
 
-      case actionTypes.DISPLAY_ADD:
+      case 'DISPLAY_ADD':
          return {
             displayTransaction: true,
             transactionId: null,
          };
 
-      case actionTypes.DISPLAY_EDIT:
+      case 'DISPLAY_EDIT':
          return {
             displayTransaction: true,
             transactionId: action.transactionId,

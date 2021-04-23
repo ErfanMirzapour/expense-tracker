@@ -1,4 +1,4 @@
-import { useAppContext, actionTypes } from 'contexts';
+import { useAppContext } from 'contexts';
 import classes from './TransactionsList.module.scss';
 
 const TransactionsList = () => {
@@ -6,14 +6,14 @@ const TransactionsList = () => {
 
    return (
       <>
-         <button onClick={() => dispatch({ type: actionTypes.DISPLAY_ADD })}>
+         <button onClick={() => dispatch({ type: 'DISPLAY_ADD' })}>
             new
          </button>
          <ul>
             <li
                onClick={() =>
                   dispatch({
-                     type: actionTypes.DISPLAY_EDIT,
+                     type: 'DISPLAY_EDIT',
                      transactionId: '123',
                   })
                }
