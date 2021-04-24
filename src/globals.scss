@@ -4,7 +4,21 @@
    box-sizing: border-box;
 }
 
+:root {
+   --primary: hsl(232, 20%, 22%);
+   --radius: 0.5rem;
+}
+
 body {
    margin: 0;
+   padding: 1rem 1rem 0;
    font-family: 'Architects Daughter', cursive;
+}
+
+main {
+   margin: 0 auto;
+   border: 2px solid var(--primary);
+   border-radius: var(--radius);
+   width: 37rem;
+   max-width: 100%;
 }

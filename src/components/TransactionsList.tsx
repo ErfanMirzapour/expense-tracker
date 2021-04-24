@@ -1,7 +1,12 @@
 import { useAppContext } from 'contexts';
-import classes from './TransactionsList.module.scss';
+import { Transaction } from 'store';
+import classes from './css/TransactionsList.module.scss';
 
-const TransactionsList = () => {
+interface Props {
+   transactions: Transaction[]
+}
+
+const TransactionsList = ({transactions}: Props) => {
    const [, dispatch] = useAppContext();
 
    return (
