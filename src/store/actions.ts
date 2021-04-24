@@ -2,21 +2,19 @@ import { nanoid } from 'nanoid';
 
 import { Transaction } from './root-reducer';
 
-type TransactionWithoutId = Omit<Transaction, 'id'>;
-
 export const setInitBalance = (value: number) => ({
    type: 'SET_INIT_BALANCE' as const,
    value,
 });
 
-export const addTransaction = (transaction: TransactionWithoutId) => ({
+export const addTransaction = (transaction: Transaction) => ({
    type: 'ADD_TRANSACTION' as const,
    transaction: { ...transaction, id: nanoid() },
 });
 
 export const editTransaction = (
    transactionId: string,
-   newTransaction: TransactionWithoutId
+   newTransaction: Transaction
 ) => ({
    type: 'EDIT_TRANSACTION' as const,
    transactionId,

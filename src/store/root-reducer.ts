@@ -3,7 +3,7 @@ import { isDateAfterOrEqual } from 'utils';
 import { ActionType } from './actions';
 
 export interface Transaction {
-   id: string;
+   id?: string;
    date: string;
    amount: number;
    type: typeof TRANSACTION_TYPES[number];
