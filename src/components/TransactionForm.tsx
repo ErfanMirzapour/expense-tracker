@@ -27,7 +27,10 @@ interface FormValues {
 }
 
 const schema = yup.object().shape({
-   amount: yup.number().required(),
+   amount: yup
+      .number()
+      .positive('Amount should be a positive number: 120.12')
+      .required(),
    date: yup.string().required('Pick a date!'),
 });
 
@@ -79,7 +82,10 @@ const TransactionForm: FC<Props> = ({
                {...register('amount', { valueAsNumber: true })}
             />
             <p className={classes['error']}>
-               {errors.amount && 'Amount should be a number!'}
+               {errors.amount &&
+                  (errors.amount.type === 'typeError'
+                     ? 'Amount should be a number!'
+                     : errors.amount.message)}
             </p>
 
             <label htmlFor='type'>Type</label>
@@ -119,7 +125,7 @@ const TransactionForm: FC<Props> = ({
                   Delete
                </button>
             )}
-            
+
             <button
                type='button'
                className={classes['btn']}
