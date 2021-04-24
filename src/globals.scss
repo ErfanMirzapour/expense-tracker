@@ -15,6 +15,12 @@ body {
    font-family: 'Architects Daughter', cursive;
 }
 
+button, input[type='button']{
+   cursor: pointer;
+   background-color: transparent;
+   border: none;
+}
+
 main {
    margin: 0 auto;
    // border: 2px solid var(--primary);

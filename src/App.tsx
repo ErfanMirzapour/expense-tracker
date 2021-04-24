@@ -1,7 +1,14 @@
 import { useMemo } from 'react';
 
 import { Wallet, TransactionsList, TransactionForm } from './components';
-import { useSelector, useDispatch, setInitBalance } from './store';
+import {
+   useSelector,
+   useDispatch,
+   setInitBalance,
+   Transaction,
+   addTransaction,
+   editTransaction,
+} from './store';
 import { useAppContext } from './contexts';
 
 // Only this container subscribe and dispatch to redux
@@ -18,6 +25,13 @@ const App = () => {
       [transactionId]
    );
 
+   const submitTransaction = (transaction: Transaction) => {
+      const { id } = transaction;
+      
+      if (id) dispatch(editTransaction(id, transaction));
+      else dispatch(addTransaction(transaction));
+   };
+
    return (
       <main>
          <Wallet
@@ -28,7 +42,7 @@ const App = () => {
          {displayTransaction ? (
             <TransactionForm
                transaction={editingTransaction}
-               onSubmit={() => {}}
+               submitTransaction={submitTransaction}
             />
          ) : (
             <TransactionsList transactions={transactions} />

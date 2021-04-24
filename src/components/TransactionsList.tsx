@@ -8,22 +8,25 @@ interface Props {
 }
 
 const TransactionsList: FC<Props> = ({ transactions }) => {
-   const [, dispatch] = useAppContext();
+   const [, appDispatch] = useAppContext();
 
    return (
       <>
-         <button onClick={() => dispatch({ type: 'DISPLAY_ADD' })}>new</button>
+         <button onClick={() => appDispatch({ type: 'DISPLAY_ADD' })}>new</button>
          <ul>
-            <li
-               onClick={() =>
-                  dispatch({
-                     type: 'DISPLAY_EDIT',
-                     transactionId: '123',
-                  })
-               }
-            >
-               Transaction 123
-            </li>
+            {transactions.map(({ amount, id }) => (
+               <li
+                  key={id}
+                  onClick={() =>
+                     appDispatch({
+                        type: 'DISPLAY_EDIT',
+                        transactionId: id!,
+                     })
+                  }
+               >
+                  {amount}
+               </li>
+            ))}
          </ul>
       </>
    );

@@ -1,20 +1,97 @@
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
+import { useForm, SubmitHandler } from 'react-hook-form';
+import { DevTool } from '@hookform/devtools';
+
 import { useAppContext } from 'contexts';
 import { Transaction } from 'store';
-import classes from './Transaction.module.scss';
+import {
+   GAINED_TYPES,
+   PAYMENT_TYPES,
+   READABLE_TYPES,
+   TRANSACTION_TYPES,
+} from '../constants';
+import classes from './css/TransactionForm.module.scss';
 
 interface Props {
-   transaction: Transaction | undefined;
-   onSubmit: (transaction: Omit<Transaction, 'id'>) => void;
+   transaction?: Transaction;
+   submitTransaction: (transaction: Transaction) => void;
 }
 
-const TransactionForm: FC<Props> = ({ transaction, onSubmit }) => {
-   const [{ transactionId }, dispatch] = useAppContext();
+interface FormValues {
+   amount: number;
+   type: typeof TRANSACTION_TYPES[number];
+   date: string;
+}
+
+const TransactionForm: FC<Props> = ({ transaction, submitTransaction }) => {
+   const [, appDispatch] = useAppContext();
+   const { register, handleSubmit, control } = useForm<FormValues>({
+      mode: 'onTouched',
+   });
+
+   const defaultValues: FormValues = useMemo(
+      () => ({
+         amount: transaction?.amount ?? 0,
+         type: transaction?.type ?? 'BANK_PROFIT',
+         date: transaction?.date ?? '',
+      }),
+      [transaction]
+   );
+
+   const onSubmit: SubmitHandler<FormValues> = values => {
+      submitTransaction({ ...values, id: transaction?.id });
+      backToHome();
+   };
+
+   const backToHome = () => appDispatch({ type: 'DISPLAY_LIST' });
 
    return (
       <>
-         <h2>Transaction {transactionId ?? 'new'}</h2>
-         <button onClick={() => dispatch({ type: 'DISPLAY_LIST' })}>back</button>
+         <form className={classes['form']} onSubmit={handleSubmit(onSubmit)}>
+            <label htmlFor='amount'>Amount</label>
+            <input
+               type='text'
+               placeholder='0'
+               defaultValue={defaultValues.amount}
+               {...register('amount', { valueAsNumber: true })}
+            />
+
+            <label htmlFor='type'>Type</label>
+            <select {...register('type')} defaultValue={defaultValues.type}>
+               <optgroup label='Profit'>
+                  {GAINED_TYPES.map(type => (
+                     <option value={type}>{READABLE_TYPES[type]}</option>
+                  ))}
+               </optgroup>
+
+               <optgroup label='Loss'>
+                  {PAYMENT_TYPES.map(type => (
+                     <option value={type}>{READABLE_TYPES[type]}</option>
+                  ))}
+               </optgroup>
+            </select>
+
+            <label htmlFor='date'>Date</label>
+            <input
+               type='date'
+               {...register('date')}
+               defaultValue={defaultValues.date}
+            />
+
+            <button type='submit' className={classes['btn']}>
+               Submit
+            </button>
+
+            <button
+               type='button'
+               className={classes['btn']}
+               onClick={backToHome}
+            >
+               Cancel
+            </button>
+         </form>
+
+         <DevTool control={control} />
       </>
    );
 };
