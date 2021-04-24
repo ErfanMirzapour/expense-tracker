@@ -44,6 +44,6 @@ it('Should not submit a negative initial balance', () => {
 
    userEvent.click(getByRole('button'));
    const input = getByLabelText('Initial Balance');
-   userEvent.type(getByLabelText('Initial Balance'), '-120');
+   userEvent.type(getByLabelText('Initial Balance'), '-120{enter}');
    expect(input).toBeInTheDocument();
 });

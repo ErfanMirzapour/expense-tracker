@@ -11,6 +11,8 @@ interface Props {
    onInitChange: (initBalance: number) => void;
 }
 
+const today = new Date();
+
 const Wallet: FC<Props> = ({ initBalance, transactions, onInitChange }) => {
    const [balanceInput, setBalanceInput] = useState<string | null>(null);
 
@@ -44,7 +46,7 @@ const Wallet: FC<Props> = ({ initBalance, transactions, onInitChange }) => {
       <section className={classes['wallet']}>
          <div>
             <span>Wallet Balance</span>
-            <span>{formatDate(new Date())}</span>
+            <time dateTime={today.toISOString()}>{formatDate(today)}</time>
          </div>
 
          <div>

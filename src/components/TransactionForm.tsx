@@ -76,13 +76,17 @@ const TransactionForm: FC<Props> = ({ transaction, submitTransaction }) => {
             <select {...register('type')} defaultValue={defaultValues.type}>
                <optgroup label='Profit'>
                   {GAINED_TYPES.map(type => (
-                     <option value={type}>{READABLE_TYPES[type]}</option>
+                     <option key={type} value={type}>
+                        {READABLE_TYPES[type]}
+                     </option>
                   ))}
                </optgroup>
 
                <optgroup label='Loss'>
                   {PAYMENT_TYPES.map(type => (
-                     <option value={type}>{READABLE_TYPES[type]}</option>
+                     <option key={type} value={type}>
+                        {READABLE_TYPES[type]}
+                     </option>
                   ))}
                </optgroup>
             </select>
