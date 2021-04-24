@@ -16,10 +16,17 @@ body {
    font-family: 'Architects Daughter', cursive;
 }
 
-button, input[type='button']{
+button,
+input[type='submit'],
+input[type='button'] {
    cursor: pointer;
    background-color: transparent;
    border: none;
+}
+
+ul {
+   list-style-type: none;
+   padding: 0;
 }
 
 main {

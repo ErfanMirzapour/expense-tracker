@@ -1,0 +1,63 @@
+.add-btn {
+   width: 100%;
+   text-align: center;
+   background-color: var(--secondary);
+   color: #fff;
+   font-weight: bold;
+   font-size: large;
+   padding: 1em;
+   border-radius: var(--radius);
+   margin-top: -2.5rem;
+}
+
+.transaction {
+   cursor: pointer;
+   border-radius: var(--radius);
+   border: 1px solid hsla(0, 4%, 50%, 0.276);
+   padding: 0 1.25rem;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   align-content: stretch;
+   height: 6rem;
+   margin-bottom: 0.5rem;
+   transition-property: transform box-shadow;
+   transition-duration: 0.3s;
+
+   &:hover {
+      transform: translateY(-0.3rem);
+      box-shadow: 0 0 15px var(--primary);
+   }
+
+   & > time {
+      font-size: xx-large;
+      padding-right: .6rem;
+      border-right: 1px solid hsla(0, 4%, 50%, 0.276);
+      width: 4rem;
+      text-align: center;
+   }
+   & > .type {
+      padding-left: 1.1rem;
+      flex: 1;
+
+      & > span {
+         display: block;
+      }
+
+      & > span:last-child {
+         color: rgb(123, 121, 121);
+      }
+   }
+   & > .income,
+   .expense {
+      font-weight: bold;
+   }
+
+   & > .income {
+      color: rgb(0, 183, 0);
+   }
+
+   & > .expense {
+      color: rgb(234, 14, 14);
+   }
+}

@@ -22,8 +22,7 @@ const Wallet: FC<Props> = ({ initBalance, transactions, onInitChange }) => {
          // = transactions outcome
          transactions.reduce(
             (outcome, { type, amount }) =>
-               //@ts-ignore
-               PAYMENT_TYPES.includes(type)
+               (PAYMENT_TYPES as any).includes(type)
                   ? outcome - amount
                   : outcome + amount,
             0

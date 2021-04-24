@@ -8,6 +8,7 @@ import {
    Transaction,
    addTransaction,
    editTransaction,
+   deleteTransaction,
 } from './store';
 import { useAppContext } from './contexts';
 
@@ -27,7 +28,7 @@ const App = () => {
 
    const submitTransaction = (transaction: Transaction) => {
       const { id } = transaction;
-      
+
       if (id) dispatch(editTransaction(id, transaction));
       else dispatch(addTransaction(transaction));
    };
@@ -43,6 +44,9 @@ const App = () => {
             <TransactionForm
                transaction={editingTransaction}
                submitTransaction={submitTransaction}
+               deleteTransaction={id =>
+                  dispatch(deleteTransaction(id))
+               }
             />
          ) : (
             <TransactionsList transactions={transactions} />

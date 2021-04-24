@@ -17,6 +17,7 @@ import classes from './css/TransactionForm.module.scss';
 interface Props {
    transaction?: Transaction;
    submitTransaction: (transaction: Transaction) => void;
+   deleteTransaction: (transactionId: string) => void;
 }
 
 interface FormValues {
@@ -30,7 +31,11 @@ const schema = yup.object().shape({
    date: yup.string().required('Pick a date!'),
 });
 
-const TransactionForm: FC<Props> = ({ transaction, submitTransaction }) => {
+const TransactionForm: FC<Props> = ({
+   transaction,
+   submitTransaction,
+   deleteTransaction,
+}) => {
    const [, appDispatch] = useAppContext();
    const {
       register,
@@ -56,6 +61,11 @@ const TransactionForm: FC<Props> = ({ transaction, submitTransaction }) => {
       backToHome();
    };
 
+   const remove = () => {
+      deleteTransaction(transaction?.id!);
+      backToHome();
+   };
+
    const backToHome = () => appDispatch({ type: 'DISPLAY_LIST' });
 
    return (
@@ -74,7 +84,7 @@ const TransactionForm: FC<Props> = ({ transaction, submitTransaction }) => {
 
             <label htmlFor='type'>Type</label>
             <select {...register('type')} defaultValue={defaultValues.type}>
-               <optgroup label='Profit'>
+               <optgroup label='Income'>
                   {GAINED_TYPES.map(type => (
                      <option key={type} value={type}>
                         {READABLE_TYPES[type]}
@@ -82,7 +92,7 @@ const TransactionForm: FC<Props> = ({ transaction, submitTransaction }) => {
                   ))}
                </optgroup>
 
-               <optgroup label='Loss'>
+               <optgroup label='Expense'>
                   {PAYMENT_TYPES.map(type => (
                      <option key={type} value={type}>
                         {READABLE_TYPES[type]}
@@ -104,6 +114,12 @@ const TransactionForm: FC<Props> = ({ transaction, submitTransaction }) => {
                Submit
             </button>
 
+            {transaction && (
+               <button type='button' className={classes['btn']} onClick={remove}>
+                  Delete
+               </button>
+            )}
+            
             <button
                type='button'
                className={classes['btn']}

@@ -33,7 +33,7 @@
    border-radius: var(--radius);
    margin-bottom: 1rem;
 
-   & + .btn {
+   & ~ .btn:last-child {
       background-color: transparent;
       border: 2px dashed var(--secondary);
       color: unset;
