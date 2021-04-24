@@ -1,18 +1,12 @@
+import { TRANSACTION_TYPES } from '../constants';
 import { isDateAfterOrEqual } from 'utils';
 import { ActionType } from './actions';
-
-type TransactionType =
-   | 'CAR_PAYMENT'
-   | 'HOUSE_PAYMENT'
-   | 'PROFIT'
-   | 'SALARY'
-   | 'TAX';
 
 export interface Transaction {
    id: string;
    date: string;
    amount: number;
-   type: TransactionType;
+   type: typeof TRANSACTION_TYPES[number];
 }
 
 interface Reducer {
