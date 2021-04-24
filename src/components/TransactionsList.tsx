@@ -1,4 +1,4 @@
-import { FC, useState, useEffect } from 'react';
+import { FC, useState, useMemo } from 'react';
 
 import { READABLE_TYPES, GAINED_TYPES } from '../constants';
 import { useAppContext } from 'contexts';
@@ -11,29 +11,26 @@ interface Props {
 }
 
 const TransactionsList: FC<Props> = ({ transactions }) => {
-   const [filteredTransactions, setFilteredTransactions] = useState(
-      transactions
-   );
    const [filter, setFilter] = useState('');
 
    const [, appDispatch] = useAppContext();
 
    // Filter transactions by group type or type of them
-   useEffect(() => {
-      const filteredResult = transactions.filter(({ type }) => {
-         const regExp = new RegExp(filter, 'i');
-         const groupType = (GAINED_TYPES as any).includes(type)
-            ? 'income'
-            : 'expense';
+   const filteredTransactions = useMemo(
+      () =>
+         transactions.filter(({ type }) => {
+            const regExp = new RegExp(filter, 'i');
+            const groupType = (GAINED_TYPES as any).includes(type)
+               ? 'income'
+               : 'expense';
 
-         return (
-            READABLE_TYPES[type].search(regExp) > -1 ||
-            groupType.search(regExp) > -1
-         );
-      });
-
-      setFilteredTransactions(filteredResult);
-   }, [transactions, filter]);
+            return (
+               READABLE_TYPES[type].search(regExp) > -1 ||
+               groupType.search(regExp) > -1
+            );
+         }),
+      [transactions, filter]
+   );
 
    return (
       <>
@@ -53,7 +50,9 @@ const TransactionsList: FC<Props> = ({ transactions }) => {
                onChange={e => setFilter(e.target.value)}
             />
          )}
-         {filteredTransactions.length === 0 && <p className={classes['info']}>No Transactions!</p>}
+         {filteredTransactions.length === 0 && (
+            <p className={classes['info']}>No Transactions!</p>
+         )}
          <ul>
             {filteredTransactions.map(({ amount, id, type, date: isoDate }) => {
                const isIncome = (GAINED_TYPES as any).includes(type);
