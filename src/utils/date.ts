@@ -1,5 +1,7 @@
+import { MONTHS } from '../constants';
+
 /**
- * Return a boolean indicating whether isoDate1
+ * @returns a boolean indicating whether isoDate1
  * is after or equal with isoDate2 or not
  */
 export const isDateAfterOrEqual = (isoDate1: string, isoDate2: string) => {
@@ -10,4 +12,10 @@ export const isDateAfterOrEqual = (isoDate1: string, isoDate2: string) => {
       throw Error('Invalid input!');
 
    return date1ms >= date2ms;
+};
+
+export const formatDate = (date: Date) => {
+   const [month, day, year] = date.toLocaleDateString().split('/');
+
+   return `${MONTHS[Number(month) - 1]} ${day}, ${year}`;
 };
