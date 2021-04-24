@@ -1,13 +1,14 @@
+import { FC } from 'react';
 import { useAppContext } from 'contexts';
 import { Transaction } from 'store';
-import classes from './css/Transaction.module.scss';
+import classes from './Transaction.module.scss';
 
 interface Props {
    transaction: Transaction | undefined;
    onSubmit: (transaction: Omit<Transaction, 'id'>) => void;
 }
 
-const TransactionForm = ({ transaction, onSubmit }: Props) => {
+const TransactionForm: FC<Props> = ({ transaction, onSubmit }) => {
    const [{ transactionId }, dispatch] = useAppContext();
 
    return (

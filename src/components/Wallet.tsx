@@ -1,4 +1,4 @@
-import { useState, useMemo, FormEventHandler } from 'react';
+import { FC, useState, useMemo, FormEventHandler } from 'react';
 
 import { formatDate, formatAmount } from 'utils';
 import { Transaction } from 'store';
@@ -11,7 +11,7 @@ interface Props {
    onInitChange: (initBalance: number) => void;
 }
 
-const Wallet = ({ initBalance, transactions, onInitChange }: Props) => {
+const Wallet: FC<Props> = ({ initBalance, transactions, onInitChange }) => {
    const [balanceInput, setBalanceInput] = useState<string | null>(null);
 
    const balance = useMemo(
