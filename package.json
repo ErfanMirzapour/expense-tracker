@@ -1,6 +1,11 @@
 {
-   "name": "growmatik-sample",
+   "name": "expense-tracker",
    "private": true,
+   "homepage": "https://simple-expensetracker.netlify.app",
+   "repository": {
+      "type": "git",
+      "url": "https://github.com/ErfanMirzapour/expense-tracker.git"
+   },
    "scripts": {
       "prepare": "husky install",
       "type": "tsc",
