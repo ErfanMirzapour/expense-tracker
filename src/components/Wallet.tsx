@@ -32,7 +32,9 @@ const Wallet: FC<Props> = ({ initBalance, transactions, onInitChange }) => {
    const onSubmit: FormEventHandler = e => {
       e.preventDefault();
 
-      if (Number.isNaN(Number(balanceInput))) return;
+      // If is NaN or negative return
+      if (Number.isNaN(Number(balanceInput)) || balanceInput?.includes('-'))
+         return;
 
       onInitChange(Number(balanceInput));
       setBalanceInput(null);

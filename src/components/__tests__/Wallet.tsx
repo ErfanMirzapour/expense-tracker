@@ -38,3 +38,12 @@ it('Should focus on balance input after clicking edit icon', () => {
    expect(input).toHaveFocus();
    expect(input).toHaveDisplayValue('0');
 });
+
+it('Should not submit a negative initial balance', () => {
+   const { getByRole, getByLabelText } = render(<Wallet {...walletProps} />);
+
+   userEvent.click(getByRole('button'));
+   const input = getByLabelText('Initial Balance');
+   userEvent.type(getByLabelText('Initial Balance'), '-120');
+   expect(input).toBeInTheDocument();
+});
