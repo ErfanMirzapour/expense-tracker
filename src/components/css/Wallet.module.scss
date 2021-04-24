@@ -1,0 +1,41 @@
+.wallet {
+   background-color: var(--primary);
+   color: #fff;
+   padding: 1rem 1.5rem;
+   border-radius: 0 0 var(--radius) var(--radius);
+   margin-bottom: 2rem;
+
+   & > div {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+   }
+
+   & > :first-child {
+      margin-bottom: 2rem;
+   }
+}
+
+.balance {
+   font-size: xx-large;
+
+   & :global .material-icons {
+      color: orange;
+      margin-left: 0.5rem;
+      cursor: pointer;
+   }
+
+   & input {
+      background-color: transparent;
+      border: none;
+      padding: 0;
+      width: 10rem;
+      font-size: inherit;
+      color: inherit;
+      font-family: inherit;
+
+      &:focus {
+         outline: none;
+      }
+   }
+}
