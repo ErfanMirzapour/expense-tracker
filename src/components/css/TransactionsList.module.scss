@@ -7,7 +7,27 @@
    font-size: large;
    padding: 1em;
    border-radius: var(--radius);
-   margin-top: -2.5rem;
+   margin: -2.5rem 0 1rem;
+}
+
+.filter {
+   width: 100%;
+   border: none;
+   border-bottom: 1px solid hsl(0, 4%, 50%);
+   padding: 0.5rem 1rem;
+   text-align: center;
+   font-size: large;
+   transition: border-bottom-color var(--transition-duration);
+
+   &:focus {
+      outline: none;
+      border-bottom-color: var(--primary);
+   }
+}
+
+.info {
+   text-align: center;
+   font-size: x-large;
 }
 
 .transaction {
@@ -22,7 +42,7 @@
    height: 6rem;
    margin-bottom: 0.5rem;
    transition-property: transform box-shadow;
-   transition-duration: 0.3s;
+   transition-duration: var(--transition-duration);
 
    &:hover {
       transform: translateY(-0.3rem);
@@ -31,7 +51,7 @@
 
    & > time {
       font-size: xx-large;
-      padding-right: .6rem;
+      padding-right: 0.6rem;
       border-right: 1px solid hsla(0, 4%, 50%, 0.276);
       width: 4rem;
       text-align: center;

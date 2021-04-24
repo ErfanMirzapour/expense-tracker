@@ -13,7 +13,7 @@
       background-color: transparent;
       border-bottom: 2px solid rgb(212, 206, 206);
       padding: 0.25rem 0.65rem;
-      transition: border-bottom-color 0.3s;
+      transition: border-bottom-color var(--transition-duration);
       outline: none;
 
       &:focus {
@@ -38,7 +38,7 @@
       border: 2px dashed var(--secondary);
       color: unset;
       transition-property: background-color, color;
-      transition-duration: 0.3s;
+      transition-duration: var(--transition-duration);
 
       &:hover {
          background-color: var(--secondary);
