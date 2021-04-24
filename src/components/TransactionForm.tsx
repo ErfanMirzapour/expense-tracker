@@ -1,5 +1,7 @@
 import { FC, useMemo } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
 import { DevTool } from '@hookform/devtools';
 
 import { useAppContext } from 'contexts';
@@ -23,10 +25,21 @@ interface FormValues {
    date: string;
 }
 
+const schema = yup.object().shape({
+   amount: yup.number().required(),
+   date: yup.string().required('Pick a date!'),
+});
+
 const TransactionForm: FC<Props> = ({ transaction, submitTransaction }) => {
    const [, appDispatch] = useAppContext();
-   const { register, handleSubmit, control } = useForm<FormValues>({
+   const {
+      register,
+      handleSubmit,
+      formState: { errors },
+      control,
+   } = useForm<FormValues>({
       mode: 'onTouched',
+      resolver: yupResolver(schema),
    });
 
    const defaultValues: FormValues = useMemo(
@@ -55,6 +68,9 @@ const TransactionForm: FC<Props> = ({ transaction, submitTransaction }) => {
                defaultValue={defaultValues.amount}
                {...register('amount', { valueAsNumber: true })}
             />
+            <p className={classes['error']}>
+               {errors.amount && 'Amount should be a number!'}
+            </p>
 
             <label htmlFor='type'>Type</label>
             <select {...register('type')} defaultValue={defaultValues.type}>
@@ -70,6 +86,7 @@ const TransactionForm: FC<Props> = ({ transaction, submitTransaction }) => {
                   ))}
                </optgroup>
             </select>
+            <p className={classes['error']}>{errors.type?.message}</p>
 
             <label htmlFor='date'>Date</label>
             <input
@@ -77,6 +94,7 @@ const TransactionForm: FC<Props> = ({ transaction, submitTransaction }) => {
                {...register('date')}
                defaultValue={defaultValues.date}
             />
+            <p className={classes['error']}>{errors.date?.message}</p>
 
             <button type='submit' className={classes['btn']}>
                Submit
