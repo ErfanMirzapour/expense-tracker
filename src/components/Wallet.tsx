@@ -58,6 +58,7 @@ const Wallet: FC<Props> = ({ initBalance, transactions, onInitChange }) => {
                         autoFocus
                         value={balanceInput}
                         onChange={e => setBalanceInput(e.target.value)}
+                        onBlur={() => setBalanceInput(null)}
                      />
                   </form>
                ) : (
