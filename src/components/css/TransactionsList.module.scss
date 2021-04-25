@@ -1,3 +1,24 @@
+.container {
+   &  h2 {
+      padding-left: 1rem;
+      margin-bottom: 0.75rem;
+      margin-top: 2rem;
+
+      &:not(:first-of-type) {
+         margin-top: 2.75rem;
+      }
+   }
+
+   & h3 {
+      padding-left: 2rem;
+      margin-top: 0;
+   }
+
+   &  ul {
+      margin-bottom: 1rem;
+   }
+}
+
 .add-btn {
    width: 100%;
    text-align: center;
@@ -7,17 +28,18 @@
    font-size: large;
    padding: 1em;
    border-radius: var(--radius);
-   margin: -2.5rem 0 1rem;
+   margin: -2.5rem 0 1.5rem;
 }
 
 .filter {
    width: 100%;
    border: none;
-   border-bottom: 1px solid hsl(0, 4%, 50%);
+   border-bottom: 3px solid hsl(0, 4%, 50%);
    padding: 0.5rem 1rem;
    text-align: center;
    font-size: large;
    transition: border-bottom-color var(--transition-duration);
+   // margin-bottom: 20px;
 
    &:focus {
       outline: none;
